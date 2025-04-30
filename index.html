@@ -114,7 +114,7 @@
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
         
-         @media (max-width: 768px) {
+         @media (max-width: 600px) {
             .container {
                 width: 90vw;
                 padding: 30px;
@@ -126,6 +126,16 @@
                 width: 90vw;
                 font-size: 16px;
                 padding: 20px;
+                position: static;
+                margin-top: 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            label {
+                font-size: 20px;
             }
 
             .password-display input {
@@ -136,6 +146,7 @@
             input[type="number"] {
                 width: 100%;
                 font-size: 18px;
+                padding: 10px;
             }
 
             button {
@@ -143,6 +154,10 @@
                 padding: 12px;
                 width: 100%;
                 margin-top: 10px;
+            }
+            #strengthBar {
+                width: 100%;
+                margin-left: 0;
             }
         }
         </style>
