@@ -14,7 +14,7 @@ A simple and interactive password generator built using **HTML**, **CSS**, and *
 ## 💻 Live Demo
 
 You can view the live project here:  
-👉 [https://your-username.github.io/your-repo-name](https://your-username.github.io/your-repo-name)
+👉 [Open From Here!]([https://your-username.github.io/your-repo-name](https://radoslavnikolov23.github.io/PasswordGenerator/))
 
 > *(Replace this link with your GitHub Pages URL after deploying)*
 
