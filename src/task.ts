@@ -38,6 +38,7 @@ function showPasswordStrength(lenght:number){
 button.addEventListener("click",() =>{
     let length = parseInt(passwordLength.value,12);
     message.textContent = "";
+    messageWarning.textContent = "";
 
     if (isNaN(length)) {
         message.textContent = "Please enter a number.";
@@ -48,7 +49,7 @@ button.addEventListener("click",() =>{
         messageWarning.textContent = "Password must be at least 8 characters. Using 8 instead.";
         length=8;
     }    
-    else if(length>32){
+    else if(length>33){
         messageWarning.textContent = "Password can't be more than 32 characters. Using 32 instead.";
         length = 32;
     } 
