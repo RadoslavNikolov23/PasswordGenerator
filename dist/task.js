@@ -1,25 +1,55 @@
-"use strict";
-const button = document.getElementById("generateButton");
-const input = document.getElementById("password");
-const passwordLength = document.getElementById("passwordLength");
-const message = document.getElementById("message");
-const messageWarning = document.getElementById("messageWarning");
-const resetButton = document.getElementById("resetButton");
-const copyClipboardButton = document.getElementById("copyClipboardButton");
-const strengthLevel = document.getElementById("strengthLevel");
-const toggle = document.getElementById("togglePassword");
-function passwordGenerator(lenght = 12) {
-    const char = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-+=";
-    let password = "";
-    for (let i = 0; i < lenght; i++) {
-        const index = Math.floor(Math.random() * char.length);
+var button = document.getElementById("generateButton");
+var input = document.getElementById("password");
+var passwordLength = document.getElementById("passwordLength");
+var message = document.getElementById("message");
+var messageWarning = document.getElementById("messageWarning");
+var resetButton = document.getElementById("resetButton");
+var copyClipboardButton = document.getElementById("copyClipboardButton");
+var strengthLevel = document.getElementById("strengthLevel");
+var toggle = document.getElementById("togglePassword");
+button.addEventListener("click", function () {
+    var rawValue = passwordLength.value.trim();
+    var length = Number(rawValue);
+    message.textContent = "";
+    messageWarning.textContent = "";
+    if (isNaN(length)) {
+        message.textContent = "Please enter a number.";
+        return;
+    }
+    if (length < 8) {
+        messageWarning.textContent = "⚠️ Password must be at least 8 characters.";
+        input.value = "";
+        strengthLevel.style.width = "0%";
+        return;
+    }
+    else if (length > 40) {
+        messageWarning.textContent = "⚠️ Password can't be more than 40 characters.";
+        input.value = "";
+        strengthLevel.style.width = "0%";
+        return;
+    }
+    var password = passwordGenerator(length);
+    input.value = password;
+    showPasswordStrength(length);
+});
+function passwordGenerator(lenght) {
+    if (lenght === void 0) { lenght = 12; }
+    var char = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-+=";
+    var password = "";
+    for (var i = 0; i < lenght; i++) {
+        var index = getRandomInt(0, char.length - 1);
         password += char[index];
     }
     return password;
 }
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 function showPasswordStrength(lenght) {
-    let strength = 0;
-    let color = "red";
+    var strength = 0;
+    var color = "red";
     if (lenght >= 8)
         strength = 33;
     if (lenght >= 20)
@@ -32,37 +62,17 @@ function showPasswordStrength(lenght) {
         color = "gold";
     if (strength === 99)
         color = "green";
-    strengthLevel.style.width = `${strength}%`;
+    strengthLevel.style.width = "".concat(strength, "%");
     strengthLevel.style.backgroundColor = color;
 }
-button.addEventListener("click", () => {
-    let length = parseInt(passwordLength.value, 12);
-    message.textContent = "";
-    messageWarning.textContent = "";
-    if (isNaN(length)) {
-        message.textContent = "Please enter a number.";
-        return;
-    }
-    if (length < 8) {
-        messageWarning.textContent = "Password must be at least 8 characters. Using 8 instead.";
-        length = 8;
-    }
-    else if (length > 33) {
-        messageWarning.textContent = "Password can't be more than 32 characters. Using 32 instead.";
-        length = 32;
-    }
-    const password = passwordGenerator(length);
-    input.value = password;
-    showPasswordStrength(length);
-});
-resetButton.addEventListener("click", () => {
+resetButton.addEventListener("click", function () {
     passwordLength.value = "12";
     input.value = "";
     message.textContent = "";
     messageWarning.textContent = "";
     strengthLevel.style.width = "0%";
 });
-copyClipboardButton.addEventListener("click", () => {
+copyClipboardButton.addEventListener("click", function () {
     if (input.value != null) {
         navigator.clipboard.writeText(input.value);
         message.textContent = "Password copied to clipboard";
@@ -73,6 +83,6 @@ copyClipboardButton.addEventListener("click", () => {
         message.style.color = "red";
     }
 });
-toggle.addEventListener("change", () => {
+toggle.addEventListener("change", function () {
     input.type = toggle.checked ? "text" : "password";
 });
